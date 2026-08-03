@@ -1,0 +1,32 @@
+[build-system]
+requires = ["scikit-build-core >=0.10", "nanobind >=2.0"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "fast-dedup"
+version = "0.1.0"
+description = "A performance-oriented text deduplication library written in C++20 with Python bindings via nanobind"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Samuel Peterson", email = "samuelpetersonacs@gmail.com" },
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+]
+
+[project.urls]
+Homepage = "https://github.com/sdp-io/fast-dedup"
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+build-dir = "build/{wheel_tag}"
+wheel.py-api = "cp312"
+
+[tool.cibuildwheel]
+build-verbosity = 1
+test-command = "pytest {project}/tests"
+test-requires = "pytest"
+
+[tool.cibuildwheel.macos.environment]
+MACOSX_DEPLOYMENT_TARGET = "11.0"
