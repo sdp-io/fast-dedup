@@ -1,3 +1,4 @@
+.venv/
 _skbuild/
 dist/
 __pycache__/
