@@ -1,0 +1,16 @@
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: c++20
+
+IndentWidth: 2
+ColumnLimit: 100
+
+BreakBeforeBraces: Linux
+AlignConsecutiveBitFields: Consecutive
+AlignConsecutiveDeclarations: None
+
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+AllowShortBlocksOnASingleLine: Always
+AllowShortFunctionsOnASingleLine: Empty
