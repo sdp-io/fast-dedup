@@ -1,3 +1,4 @@
+#define XXH_INLINE_ALL
 #include <nanobind/nanobind.h>
 
 namespace nb = nanobind;

@@ -53,4 +53,6 @@ nanobind_add_module(
   src/fast_dedup_ext.cpp
 )
 
+target_include_directories(fast_dedup_ext PRIVATE extern/)
+
 install(TARGETS fast_dedup_ext LIBRARY DESTINATION fast_dedup)
