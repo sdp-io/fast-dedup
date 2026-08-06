@@ -1,8 +1,6 @@
 #pragma once
 
 #include "xxhash.h"
-#include <algorithm>
-#include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <string>
