@@ -1,4 +1,6 @@
 #include "bloom_filter.h"
+#include <algorithm>
+#include <cmath>
 
 namespace BloomFilter
 {
@@ -24,6 +26,25 @@ BloomFilter::BloomFilter(size_t expected_elements, double error_rate)
   ideal_k = static_cast<size_t>(k);
 
   bloom_filter.resize(num_blocks);
+}
+
+// TODO: Write documentation for Kirsch + Mitzenmacher optimization
+void BloomFilter::add(const std::string& element)
+{
+  XXH128_hash_t hash_128 = XXH3_128bits_withSeed(element.data(), element.size(), seed);
+
+  uint64_t hash1{hash_128.low64};
+  uint64_t hash2{hash_128.high64};
+
+  for (size_t i{0}; i < ideal_k; ++i) {
+    uint64_t combined_hash{hash1 + (hash2 * i)};
+
+    uint64_t bit_index{combined_hash % ideal_bits};
+    uint64_t block{bit_index / 64};
+    uint64_t bit_pos{bit_index % 64};
+
+    bloom_filter[block] |= (1ULL << bit_pos);
+  }
 }
 
 } // namespace BloomFilter

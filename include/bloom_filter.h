@@ -1,5 +1,6 @@
 #pragma once
 
+#include "xxhash.h"
 #include <algorithm>
 #include <cmath>
 #include <cstddef>
@@ -29,6 +30,7 @@ private:
   size_t ideal_bits{};
   size_t num_blocks{};
   std::vector<uint64_t> bloom_filter{};
+  XXH64_hash_t seed{1};
 };
 
 }; // namespace BloomFilter
