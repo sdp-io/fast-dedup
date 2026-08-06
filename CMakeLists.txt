@@ -51,8 +51,25 @@ nanobind_add_module(
   NB_STATIC
 
   src/fast_dedup_ext.cpp
+  src/bloom_filter.cpp
 )
 
-target_include_directories(fast_dedup_ext PRIVATE extern/)
+if (MSVC)
+  target_compile_options(fast_dedup_ext PRIVATE /W4)
+else()
+  target_compile_options(fast_dedup_ext PRIVATE
+  -Wall
+  -Wextra
+  -Wpedantic
+  -Wconversion)
+endif()
+
+target_sources(fast_dedup_ext PRIVATE
+    src/fast_dedup_ext.cpp
+    src/bloom_filter.cpp
+    include/bloom_filter.h
+)
+
+target_include_directories(fast_dedup_ext PRIVATE include/)
 
 install(TARGETS fast_dedup_ext LIBRARY DESTINATION fast_dedup)
