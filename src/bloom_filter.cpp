@@ -71,6 +71,9 @@ bool BloomFilter::contains(const std::string& element) const
   return true;
 }
 
+BloomFilter BloomFilter::copy() const
+{ return BloomFilter(*this); }
+
 void BloomFilter::clear()
 { std::fill(bloom_filter.begin(), bloom_filter.end(), 0ULL); }
 

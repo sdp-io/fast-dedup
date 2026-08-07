@@ -21,6 +21,9 @@ public:
 
   void clear();
 
+  // Explicit copy method for Python users for more "Pythonic" usage
+  BloomFilter copy() const;
+
   size_t size_in_bytes() const noexcept;
 
 private:
