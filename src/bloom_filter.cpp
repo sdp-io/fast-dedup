@@ -49,6 +49,6 @@ void BloomFilter::add(const std::string& element)
 }
 
 size_t BloomFilter::size_in_bytes() const noexcept
-{ return bloom_filter.size() * sizeof(uint64_t); }
+{ return bloom_filter.size() * sizeof(uint64_t) + sizeof(BloomFilter); }
 
 } // namespace BloomFilter
