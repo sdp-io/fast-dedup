@@ -71,6 +71,9 @@ bool BloomFilter::contains(const std::string& element) const
   return true;
 }
 
+void BloomFilter::clear()
+{ std::fill(bloom_filter.begin(), bloom_filter.end(), 0ULL); }
+
 size_t BloomFilter::size_in_bytes() const noexcept
 { return bloom_filter.size() * sizeof(uint64_t) + sizeof(BloomFilter); }
 
