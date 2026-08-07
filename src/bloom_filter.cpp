@@ -48,6 +48,29 @@ void BloomFilter::add(const std::string& element)
   }
 }
 
+bool BloomFilter::contains(const std::string& element) const
+{
+  XXH128_hash_t hash_128 = XXH3_128bits_withSeed(element.data(), element.size(), seed);
+
+  uint64_t hash1{hash_128.low64};
+  uint64_t hash2{hash_128.high64};
+
+  for (size_t i{0}; i < ideal_k; ++i) {
+    uint64_t combined_hash{hash1 + (hash2 * i)};
+
+    uint64_t bit_index{combined_hash % ideal_bits};
+    uint64_t block{bit_index / 64};
+    uint64_t bit_pos{bit_index % 64};
+
+    // Bit to check is not flipped, Bloom filter does not contain element
+    if (!(bloom_filter[block] & 1ULL << bit_pos)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 size_t BloomFilter::size_in_bytes() const noexcept
 { return bloom_filter.size() * sizeof(uint64_t) + sizeof(BloomFilter); }
 

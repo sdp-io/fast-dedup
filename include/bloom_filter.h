@@ -17,7 +17,7 @@ public:
 
   void add(const std::string& element);
 
-  bool contains(const std::string& element);
+  bool contains(const std::string& element) const;
 
   void clear();
 
