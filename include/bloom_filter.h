@@ -21,7 +21,7 @@ public:
 
   void clear();
 
-  size_t size_in_bytes();
+  size_t size_in_bytes() const noexcept;
 
 private:
   size_t ideal_k{};

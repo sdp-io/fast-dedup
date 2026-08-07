@@ -1,6 +1,7 @@
 #include "bloom_filter.h"
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 
 namespace BloomFilter
 {
@@ -46,5 +47,8 @@ void BloomFilter::add(const std::string& element)
     bloom_filter[block] |= (1ULL << bit_pos);
   }
 }
+
+size_t BloomFilter::size_in_bytes() const noexcept
+{ return bloom_filter.size() * sizeof(uint64_t); }
 
 } // namespace BloomFilter
