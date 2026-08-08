@@ -1,12 +1,12 @@
 #pragma once
 
 #include "xxhash.h"
+#include <atomic>
 #include <cstddef>
-#include <cstdint>
+#include <memory>
 #include <string>
-#include <vector>
 
-namespace BloomFilter
+namespace fast_dedup
 {
 
 class BloomFilter
@@ -15,14 +15,21 @@ class BloomFilter
 public:
   BloomFilter(size_t expected_elements, double error_rate);
 
+  BloomFilter(const BloomFilter&) = delete;
+
+  BloomFilter& operator=(const BloomFilter&) = delete;
+
+  BloomFilter(BloomFilter&&) noexcept = default;
+
+  BloomFilter& operator=(BloomFilter&&) noexcept = default;
+
+  ~BloomFilter() = default;
+
   void add(const std::string& element);
 
   bool contains(const std::string& element) const;
 
   void clear();
-
-  // Explicit copy method for Python users for more "Pythonic" usage
-  BloomFilter copy() const;
 
   size_t size_in_bytes() const noexcept;
 
@@ -30,8 +37,8 @@ private:
   size_t ideal_k{};
   size_t ideal_bits{};
   size_t num_blocks{};
-  std::vector<uint64_t> bloom_filter{};
+  std::unique_ptr<std::atomic_uint64_t[]> bloom_filter{};
   XXH64_hash_t seed{1};
 };
 
-}; // namespace BloomFilter
+}; // namespace fast_dedup

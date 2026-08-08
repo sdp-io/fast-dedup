@@ -1,9 +1,12 @@
 #include "bloom_filter.h"
+#include "nanobind/nanobind.h"
 #include <algorithm>
+#include <atomic>
 #include <cmath>
 #include <cstdint>
+#include <memory>
 
-namespace BloomFilter
+namespace fast_dedup
 {
 
 BloomFilter::BloomFilter(size_t expected_elements, double error_rate)
@@ -26,7 +29,7 @@ BloomFilter::BloomFilter(size_t expected_elements, double error_rate)
   double k = std::max(1.0, floor((m / ee_dbl) * log(2)));
   ideal_k = static_cast<size_t>(k);
 
-  bloom_filter.resize(num_blocks);
+  bloom_filter = std::make_unique<std::atomic_uint64_t[]>(num_blocks);
 }
 
 // TODO: Write documentation for Kirsch + Mitzenmacher optimization
@@ -44,7 +47,7 @@ void BloomFilter::add(const std::string& element)
     uint64_t block{bit_index / 64};
     uint64_t bit_pos{bit_index % 64};
 
-    bloom_filter[block] |= (1ULL << bit_pos);
+    bloom_filter[block].fetch_or(1ULL << bit_pos, std::memory_order_relaxed);
   }
 }
 
@@ -71,13 +74,10 @@ bool BloomFilter::contains(const std::string& element) const
   return true;
 }
 
-BloomFilter BloomFilter::copy() const
-{ return BloomFilter(*this); }
-
 void BloomFilter::clear()
-{ std::fill(bloom_filter.begin(), bloom_filter.end(), 0ULL); }
+{ std::make_unique<std::atomic_uint64_t[]>(num_blocks); }
 
 size_t BloomFilter::size_in_bytes() const noexcept
-{ return bloom_filter.size() * sizeof(uint64_t) + sizeof(BloomFilter); }
+{ return (ideal_bits / 8); }
 
-} // namespace BloomFilter
+} // namespace fast_dedup
