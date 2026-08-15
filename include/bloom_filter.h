@@ -1,10 +1,16 @@
 #pragma once
 
-#include "xxhash.h"
+// clang-format off
+#include <nanobind/nanobind.h> // Silence pip redefinition warnings
+// clang-format on
+
 #include <atomic>
 #include <cstddef>
 #include <memory>
 #include <string>
+
+#define XXH_INLINE_ALL
+#include <xxhash.h>
 
 namespace fast_dedup
 {

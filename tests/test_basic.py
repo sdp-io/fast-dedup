@@ -1,5 +1,6 @@
-import fast_dedup as m
+import fast_dedup as fd
 
 
+# 'Hello World'-esque test to ensure nanobind is functioning properly
 def test_add():
-    assert m.add(1, 2) == 3
+    assert fd.add(1, 2) == 3

@@ -1,10 +1,16 @@
+// clang-format off
+#include <nanobind/nanobind.h> // Silence pip redefinition warnings
+// clang-format on
+
 #include "bloom_filter.h"
-#include "nanobind/nanobind.h"
 #include <algorithm>
 #include <atomic>
 #include <cmath>
 #include <cstdint>
 #include <memory>
+
+#define XXH_INLINE_ALL
+#include <xxhash.h>
 
 namespace fast_dedup
 {

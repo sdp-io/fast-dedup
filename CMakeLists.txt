@@ -68,6 +68,7 @@ target_sources(fast_dedup_ext PRIVATE
     src/fast_dedup_ext.cpp
     src/bloom_filter.cpp
     include/bloom_filter.h
+    extern/xxhash.h
 )
 
 target_include_directories(fast_dedup_ext PRIVATE include/)
