@@ -81,7 +81,7 @@ bool BloomFilter::contains(const std::string& element) const
 }
 
 void BloomFilter::clear()
-{ std::make_unique<std::atomic_uint64_t[]>(num_blocks); }
+{ bloom_filter = std::make_unique<std::atomic_uint64_t[]>(num_blocks); }
 
 size_t BloomFilter::size_in_bytes() const noexcept
 { return (ideal_bits / 8); }
