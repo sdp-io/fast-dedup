@@ -71,6 +71,6 @@ target_sources(fast_dedup_ext PRIVATE
     extern/xxhash.h
 )
 
-target_include_directories(fast_dedup_ext PRIVATE include/)
+target_include_directories(fast_dedup_ext PRIVATE include/ extern/)
 
 install(TARGETS fast_dedup_ext LIBRARY DESTINATION fast_dedup)
