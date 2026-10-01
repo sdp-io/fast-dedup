@@ -20,9 +20,9 @@ public:
 
   void update(std::string_view data);
 
-  double jaccard(MinHash& set) const;
+  double jaccard(const MinHash& set) const;
 
-  MinHash merge(MinHash& set) const;
+  MinHash merge(const MinHash& set) const;
 
   bool is_empty() const noexcept;
 
