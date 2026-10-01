@@ -5,6 +5,8 @@
 // clang-format on
 
 #define XXH_INLINE_ALL
+#include <cstdint>
+#include <vector>
 #include <xxhash.h>
 
 namespace fast_dedup
@@ -14,21 +16,25 @@ class MinHash
 {
 
 public:
-  MinHash(int num_perm) : num_permutations{num_perm} {}
+  explicit MinHash(const size_t& num_permutations = 128, const size_t& seed = 1);
 
   void update(std::string_view data);
 
-  double jaccard(MinHash& set);
+  double jaccard(MinHash& set) const;
 
-  bool is_empty();
+  MinHash merge(MinHash& set) const;
+
+  bool is_empty() const noexcept;
 
   void clear();
 
-  MinHash merge(MinHash& set);
-
 private:
-  int num_permutations{};
-  XXH64_hash_t seed{1};
+  std::vector<uint64_t> min_hash{};
+  std::vector<uint64_t> A{};
+  std::vector<uint64_t> B{};
+  size_t num_perm{};
+  size_t seed{};
+  XXH64_hash_t hash_seed{seed};
 };
 
 } // namespace fast_dedup
