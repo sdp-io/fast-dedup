@@ -1,4 +1,5 @@
 #include "bloom_filter.h"
+#include "min_hash.h"
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
@@ -20,4 +21,12 @@ NB_MODULE(fast_dedup_ext, m)
       .def("contains", &BloomFilter::contains, nb::call_guard<nb::gil_scoped_release>())
       .def("clear", &BloomFilter::clear)
       .def("size_in_bytes", &BloomFilter::size_in_bytes);
+
+  nb::class_<MinHash>(m, "min_hash")
+      .def(nb::init<size_t, uint64_t>(), "num_permutations"_a = 128, "seed"_a = 1)
+      .def("update", &MinHash::update, nb::call_guard<nb::gil_scoped_release>())
+      .def("jaccard", &MinHash::jaccard, nb::call_guard<nb::gil_scoped_release>())
+      .def("merge", &MinHash::merge, nb::call_guard<nb::gil_scoped_release>())
+      .def("is_empty", &MinHash::is_empty)
+      .def("clear", &MinHash::clear);
 }

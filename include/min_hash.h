@@ -16,7 +16,7 @@ class MinHash
 {
 
 public:
-  explicit MinHash(const size_t& num_permutations = 128, const size_t& seed = 1);
+  explicit MinHash(const size_t& num_permutations = 128, const uint64_t& seed = 1);
 
   void update(std::string_view data);
 
