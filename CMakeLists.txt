@@ -52,6 +52,7 @@ nanobind_add_module(
 
   src/fast_dedup_ext.cpp
   src/bloom_filter.cpp
+  src/min_hash.cpp
 )
 
 if (MSVC)

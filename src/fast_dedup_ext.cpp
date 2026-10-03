@@ -2,6 +2,7 @@
 #include "min_hash.h"
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
+#include <nanobind/stl/string_view.h>
 
 namespace nb = nanobind;
 
