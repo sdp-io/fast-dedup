@@ -50,6 +50,10 @@ double MinHash::jaccard(const MinHash& other_set) const
     throw std::invalid_argument("MinHash mismatch: permutation count and seed must match.");
   }
 
+  if (this->is_empty() || other_set.is_empty()) {
+    return 0.0;
+  }
+
   size_t matches{0};
   for (size_t i{0}; i < num_perm; ++i) {
     if (min_hash[i] == other_set.min_hash[i]) {
