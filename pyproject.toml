@@ -30,3 +30,7 @@ test-requires = "pytest"
 
 [tool.cibuildwheel.macos.environment]
 MACOSX_DEPLOYMENT_TARGET = "11.0"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
