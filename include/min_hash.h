@@ -1,8 +1,6 @@
 #pragma once
 
-// clang-format off
 #include <nanobind/nanobind.h> // Silence pip redefinition warnings
-// clang-format on
 
 #define XXH_INLINE_ALL
 #include <cstdint>

@@ -1,6 +1,6 @@
 #pragma once
 
-// TODO: Implement 64-bit SimHash
+#include <nanobind/nanobind.h> // Silence pip redefinition warnings
 
 #define XXH_INLINE_ALL
 #include <array>
