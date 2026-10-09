@@ -7,10 +7,16 @@ comparable libraries written in pure Python.
 
 ## Features
 
-* **Bloom Filter:** Hardware-aligned, lock-free atomic bit-packing w/ 128-bit hashing via `xxHash`
+* **Bloom Filter:** Aligned and lock-free atomic bit-packing w/ 128-bit hashing via `xxHash`
 * **MinHash:** 64-bit integer overflow utilization for fast permutations (avoiding modulos)
-* **SimHash:** (In Development)
+* **SimHash:** 64-bit fingerprinting with Hamming distance calculations
 * **Suffix Array:** (Planned)
+
+## Installation
+
+```bash
+pip install fast-dedup
+```
 
 ## Building
 
