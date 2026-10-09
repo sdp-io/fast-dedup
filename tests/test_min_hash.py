@@ -6,7 +6,7 @@ import fast_dedup as fd
 
 
 def test_mh_clear():
-    min_hash = fd.min_hash()
+    min_hash = fd.MinHash()
 
     assert min_hash.is_empty()
 
@@ -19,8 +19,8 @@ def test_mh_clear():
 
 
 def test_mh_jaccard_full_match():
-    min_hash1 = fd.min_hash()
-    min_hash2 = fd.min_hash()
+    min_hash1 = fd.MinHash()
+    min_hash2 = fd.MinHash()
 
     hello = "hello"
     min_hash1.update(hello)
@@ -33,8 +33,8 @@ def test_mh_jaccard_full_match():
 
 
 def test_mh_jaccard_half_match():
-    min_hash1 = fd.min_hash()
-    min_hash2 = fd.min_hash()
+    min_hash1 = fd.MinHash()
+    min_hash2 = fd.MinHash()
 
     hello = "hello"
     min_hash1.update(hello)
@@ -53,8 +53,8 @@ def test_mh_jaccard_half_match():
 
 
 def test_mh_jaccard_no_match():
-    min_hash1 = fd.min_hash()
-    min_hash2 = fd.min_hash()
+    min_hash1 = fd.MinHash()
+    min_hash2 = fd.MinHash()
 
     hello = "hello"
     min_hash1.update(hello)
@@ -70,8 +70,8 @@ def test_mh_jaccard_no_match():
 
 
 def test_mh_merge():
-    min_hash1 = fd.min_hash()
-    min_hash2 = fd.min_hash()
+    min_hash1 = fd.MinHash()
+    min_hash2 = fd.MinHash()
 
     hello = "hello"
     min_hash1.update(hello)
@@ -81,7 +81,7 @@ def test_mh_merge():
 
     merged = min_hash1.merge(min_hash2)
 
-    min_hash3 = fd.min_hash()
+    min_hash3 = fd.MinHash()
     min_hash3.update(hello)
     min_hash3.update(goodbye)
 

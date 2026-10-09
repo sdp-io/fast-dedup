@@ -5,7 +5,7 @@ def test_bf_add_valid():
     expected_elements = 1_000_000
     error_rate = 0.01  # 1% error rate
 
-    bloom_filter = fd.bloom_filter(expected_elements, error_rate)
+    bloom_filter = fd.BloomFilter(expected_elements, error_rate)
 
     hello = "Hello"
     world = "World!"
@@ -20,7 +20,7 @@ def test_bf_add_invalid():
     expected_elements = 1_000_000
     error_rate = 0.01
 
-    bloom_filter = fd.bloom_filter(expected_elements, error_rate)
+    bloom_filter = fd.BloomFilter(expected_elements, error_rate)
 
     hello = "Hello"
     world = "World!"
@@ -36,7 +36,7 @@ def test_bf_clear():
     expected_elements = 1_000_000
     error_rate = 0.01
 
-    bloom_filter = fd.bloom_filter(expected_elements, error_rate)
+    bloom_filter = fd.BloomFilter(expected_elements, error_rate)
 
     hello = "Hello"
     world = "World!"

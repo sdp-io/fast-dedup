@@ -4,7 +4,7 @@ import fast_dedup as fd
 
 
 def test_sh_clear_and_is_empty():
-    sim_hash = fd.sim_hash()
+    sim_hash = fd.SimHash()
     assert sim_hash.fingerprint() == 0 and sim_hash.is_empty()
 
     hello = "hello"
@@ -18,7 +18,7 @@ def test_sh_clear_and_is_empty():
 
 
 def test_sh_update():
-    sim_hash = fd.sim_hash()
+    sim_hash = fd.SimHash()
 
     hello = "hello"
     sim_hash.update(hello, 1)
@@ -28,8 +28,8 @@ def test_sh_update():
 
 
 def test_sh_hamming_distance():
-    sim_hash1 = fd.sim_hash()
-    sim_hash2 = fd.sim_hash()
+    sim_hash1 = fd.SimHash()
+    sim_hash2 = fd.SimHash()
 
     hello = "hello"
     sim_hash1.update(hello, 1)
@@ -43,5 +43,5 @@ def test_sh_hamming_distance():
     assert sim_hash1.hamming_distance(sim_hash2) > 0
 
     # Testing static Hamming distance function
-    assert fd.sim_hash.hamming_distance(0b1111, 0b1100) == 2
-    assert fd.sim_hash.hamming_distance(0, 0xFFFFFFFFFFFFFFFF) == 64
+    assert fd.SimHash.hamming_distance(0b1111, 0b1100) == 2
+    assert fd.SimHash.hamming_distance(0, 0xFFFFFFFFFFFFFFFF) == 64
