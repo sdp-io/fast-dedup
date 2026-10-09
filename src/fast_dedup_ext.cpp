@@ -1,5 +1,6 @@
 #include "bloom_filter.h"
 #include "min_hash.h"
+#include "sim_hash.h"
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/string_view.h>
@@ -10,6 +11,7 @@ using namespace nb::literals;
 
 using namespace fast_dedup;
 
+// clang-format off
 NB_MODULE(fast_dedup_ext, m)
 {
   // TEST: Temp testing for development purposes
@@ -30,4 +32,14 @@ NB_MODULE(fast_dedup_ext, m)
       .def("merge", &MinHash::merge, nb::call_guard<nb::gil_scoped_release>())
       .def("is_empty", &MinHash::is_empty)
       .def("clear", &MinHash::clear);
+
+  nb::class_<SimHash>(m, "sim_hash")
+      .def(nb::init<uint64_t>(), "seed"_a = 1)
+      .def("update", &SimHash::update, nb::call_guard<nb::gil_scoped_release>())
+      .def("fingerprint", &SimHash::fingerprint)
+      .def("hamming_distance", nb::overload_cast<uint64_t, uint64_t>(&SimHash::hamming_distance))
+      .def("hamming_distance", nb::overload_cast<const SimHash&>(&SimHash::hamming_distance, nb::const_))
+      .def("is_empty", &SimHash::is_empty)
+      .def("clear", &SimHash::clear);
 }
+// clang-format off

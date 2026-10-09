@@ -15,7 +15,7 @@ class SimHash
 {
 
 public:
-  explicit SimHash(uint64_t seed);
+  explicit SimHash(uint64_t seed = 1);
 
   void update(std::string_view shingle, const int64_t weight);
 
