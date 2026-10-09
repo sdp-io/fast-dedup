@@ -7,7 +7,7 @@ comparable libraries written in pure Python.
 
 ## Features
 
-* **Bloom Filter:** Aligned and lock-free atomic bit-packing w/ 128-bit hashing via `xxHash`
+* **Bloom Filter:** 64-bit integer with lock-free atomic bit-packing w/ 128-bit hashing via `xxHash`
 * **MinHash:** 64-bit integer overflow utilization for fast permutations (avoiding modulos)
 * **SimHash:** 64-bit fingerprinting with Hamming distance calculations
 * **Suffix Array:** (Planned)
