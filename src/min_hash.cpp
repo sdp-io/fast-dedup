@@ -10,7 +10,7 @@
 namespace fast_dedup
 {
 
-MinHash::MinHash(const size_t& num_permutations, const size_t& seed)
+MinHash::MinHash(const size_t& num_permutations, const uint64_t& seed)
     : num_perm{num_permutations}, seed{seed}
 {
   min_hash.assign(num_perm, UINT64_MAX);
