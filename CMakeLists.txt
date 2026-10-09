@@ -53,6 +53,7 @@ nanobind_add_module(
   src/fast_dedup_ext.cpp
   src/bloom_filter.cpp
   src/min_hash.cpp
+  src/sim_hash.cpp
 )
 
 if (MSVC)
@@ -70,6 +71,7 @@ target_sources(fast_dedup_ext PRIVATE
     src/bloom_filter.cpp
     include/bloom_filter.h
     include/min_hash.h
+    include/sim_hash.h
     extern/xxhash.h
 )
 
