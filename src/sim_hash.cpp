@@ -1,5 +1,6 @@
 #include "sim_hash.h"
 #include <algorithm>
+#include <bit>
 
 namespace fast_dedup
 {
@@ -38,7 +39,7 @@ uint64_t SimHash::fingerprint() const noexcept
 size_t SimHash::hamming_distance(uint64_t fingerprint1, uint64_t fingerprint2) noexcept
 {
   // Static cast as Hamming distance can never be negative
-  return static_cast<size_t>(__builtin_popcountll(fingerprint1 ^ fingerprint2));
+  return static_cast<size_t>(std::popcount(fingerprint1 ^ fingerprint2));
 }
 
 size_t SimHash::hamming_distance(const SimHash& other) const noexcept
