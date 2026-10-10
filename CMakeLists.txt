@@ -41,6 +41,10 @@ nanobind_add_module(
   # Extension name
   fast_dedup_ext
 
+  # Opt into free-threading when the registered Python
+  # version supports it.
+  FREE_THREADED
+
   # Target the stable ABI for Python 3.12+, reducing
   # the number of binary wheels that must be built.
   # This does nothing on older Python versions
