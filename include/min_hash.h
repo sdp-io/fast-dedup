@@ -1,9 +1,8 @@
 #pragma once
 
-#include <nanobind/nanobind.h> // Silence pip redefinition warnings
-
 #define XXH_INLINE_ALL
 #include <cstdint>
+#include <string_view>
 #include <vector>
 #include <xxhash.h>
 

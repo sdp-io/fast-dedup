@@ -1,13 +1,10 @@
-// clang-format off
-#include <nanobind/nanobind.h> // Silence pip redefinition warnings
-// clang-format on
-
 #include "bloom_filter.h"
 #include <algorithm>
 #include <atomic>
 #include <cmath>
 #include <cstdint>
 #include <memory>
+#include <stdexcept>
 
 #define XXH_INLINE_ALL
 #include <xxhash.h>
@@ -17,6 +14,10 @@ namespace fast_dedup
 
 BloomFilter::BloomFilter(size_t expected_elements, double error_rate)
 {
+  if (expected_elements == 0 || error_rate == 0) {
+    throw std::invalid_argument("Expected elements and error rate must be greater than 0.");
+  }
+
   double ee_dbl = static_cast<double>(expected_elements);
 
   // Formula for size of bit array: m = -(n ln P) / (ln 2)^2  where n is num of expected elements
